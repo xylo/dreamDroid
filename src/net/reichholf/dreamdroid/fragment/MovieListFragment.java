@@ -357,9 +357,9 @@ public class MovieListFragment extends AbstractHttpListFragment {
 	}
 	
 	/**
-	 * @param v
-	 * @param position
-	 * @param id
+	 * @param v view
+	 * @param position position in list
+	 * @param id ? not used ?
 	 * @param isLong
 	 */
 	private void onListItemClick(View v, int position, long id, boolean isLong){
@@ -370,7 +370,7 @@ public class MovieListFragment extends AbstractHttpListFragment {
 		} else {
 		
 			CharSequence[] actions = { getText(R.string.zap), getText(R.string.delete), getText(R.string.download),
-					getText(R.string.stream) };
+					getText(R.string.stream), getText(R.string.similar), getText(R.string.imdb) };
 	
 			AlertDialog.Builder adBuilder = new AlertDialog.Builder(getActivity());
 			adBuilder.setTitle(getText(R.string.pick_action));
@@ -399,8 +399,14 @@ public class MovieListFragment extends AbstractHttpListFragment {
 							showToast(getText(R.string.missing_stream_player));
 						}
 						break;
-					default:
-						return;
+					case 4:
+						// search for similar program
+						Common.findSimilarEvents(MovieListFragment.this, mMovie.getString(Movie.KEY_TITLE));
+						break;
+					case 5:
+						// search for program at IMDb
+						IntentFactory.queryIMDb(getActivity(), mMovie.getString(Movie.KEY_TITLE));
+						break;
 					}
 				}
 			});

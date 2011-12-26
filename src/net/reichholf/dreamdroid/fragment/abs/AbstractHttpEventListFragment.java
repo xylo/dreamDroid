@@ -147,12 +147,13 @@ public abstract class AbstractHttpEventListFragment extends AbstractHttpListFrag
 	 */
 	protected void findSimilarEvents(ExtendedHashMap event){
 		//TODO fix findSimilarEvents
+		//TODO implement in Common.findSimilarEvents to remove duplicated code
 //		Intent intent = new Intent(getActivity(), SearchEpgActivity.class);
 //		intent.setAction(Intent.ACTION_SEARCH);
 //		intent.putExtra(SearchManager.QUERY, event.getString(Event.KEY_EVENT_TITLE));
 //		startActivity(intent);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

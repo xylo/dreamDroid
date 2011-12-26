@@ -24,23 +24,33 @@ import android.util.Log;
 
 /**
  * @author sre
- *
+ * @author Stefan Endrullis
  */
 public class IntentFactory {
 	/**
 	 * @param event
 	 */
 	public static void queryIMDb(Context ctx, ExtendedHashMap event){
+		queryIMDb(ctx, event.getString(Event.KEY_EVENT_TITLE));
+	}
+
+	/**
+	 * Searches for a movie at IMDb.
+	 *
+	 * @param ctx context
+	 * @param query search query for IMDb; can be a movie title, an actor, or whatever is stored in the IMDb
+	 */
+	public static void queryIMDb(Context ctx, String query){
 		Intent intent = new Intent(Intent.ACTION_VIEW);
-		String uriString = "imdb:///find?q=" + event.getString(Event.KEY_EVENT_TITLE);
+		String uriString = "imdb:///find?q=" + query;
 		intent.setData(Uri.parse(uriString));
 		try{			
 			ctx.startActivity(intent);
 		} catch(ActivityNotFoundException anfex) {
 			if(DreamDroid.getSharedPreferences().getBoolean("mobile_imdb", false)){
-				uriString = "http://m.imdb.com/find?q=" + event.getString(Event.KEY_EVENT_TITLE);
+				uriString = "http://m.imdb.com/find?q=" + query;
 			} else {
-				uriString = "http://www.imdb.com/find?q=" + event.getString(Event.KEY_EVENT_TITLE);
+				uriString = "http://www.imdb.com/find?q=" + query;
 			}
 			intent.setData(Uri.parse(uriString));
 			ctx.startActivity(intent);
@@ -48,8 +58,7 @@ public class IntentFactory {
 	}
 	
 	/**
-	 * @param ref
-	 *            A ServiceReference
+	 * @param ref A ServiceReference
 	 */
 	public static Intent getStreamServiceIntent(String ref) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -61,10 +70,6 @@ public class IntentFactory {
 		return intent;
 	}
 	
-	/**
-	 * @param ref
-	 *            A ServiceReference
-	 */
 	public static Intent getStreamFileIntent(String fileName) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		SimpleHttpClient shc = SimpleHttpClient.getInstance();

@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 /**
- * Shows the EPG of a service. Timers can be set via integrated detail dialog
+ * Shows the EPG of a service. Timers can be set via integrated detail dialog.
  * 
  * @author sreichholf
  * 

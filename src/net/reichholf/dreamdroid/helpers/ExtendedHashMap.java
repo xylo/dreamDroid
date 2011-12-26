@@ -33,22 +33,22 @@ public class ExtendedHashMap extends HashMap<String, Object> implements Serializ
 	 * Like standard put but concatenates the value if value is a
 	 * "java.lang.String" and there already was a String value for the key
 	 * 
-	 * @param key
-	 * @param value
-	 * @return
+	 * @param key key
+	 * @param value value for given
 	 */
 	public void putOrConcat(String key, Object value) {
 		// Exceptions are very expensive in terms of runtime so let's try to
 		// avoid them
 		if (containsKey(key)) {
 			try {
+				// TODO: question: Why not using String.class instead of Class.forName("java.lang.String")?
 				if (value.getClass().equals(Class.forName("java.lang.String"))) {
 
 					Object old = get(key);
 					if ((old.getClass().equals(Class.forName("java.lang.String")))) {
-						String oldval = (String) old;
+						String oldVal = (String) old;
 						String val = (String) value;
-						value = (Object) oldval.concat(val);
+						value = oldVal.concat(val);
 					}
 				}
 			} catch (Exception e) {
@@ -59,17 +59,17 @@ public class ExtendedHashMap extends HashMap<String, Object> implements Serializ
 	}
 
 	/**
-	 * @param key
-	 * @return
+	 * @param key key
+	 * @return value for given key
 	 */
 	public String getString(String key) {
 		return (String) get(key);
 	}
 	
 	/**
-	 * @param key
-	 * @param defaultString
-	 * @return
+	 * @param key key
+	 * @param defaultString default value
+	 * @return value for given key
 	 */
 	public String getString(String key, String defaultString) {
 		String retVal = (String) get(key);

@@ -21,6 +21,7 @@ import net.reichholf.dreamdroid.helpers.enigma2.requesthandler.TimerCleanupReque
 import net.reichholf.dreamdroid.helpers.enigma2.requesthandler.TimerDeleteRequestHandler;
 import net.reichholf.dreamdroid.helpers.enigma2.requesthandler.TimerListRequestHandler;
 
+import net.reichholf.dreamdroid.intents.IntentFactory;
 import org.apache.http.NameValuePair;
 
 import android.app.Activity;
@@ -107,7 +108,7 @@ public class TimerListFragment extends AbstractHttpListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		mTimer = mMapList.get((int) id);
 
-		CharSequence[] actions = { getText(R.string.edit), getText(R.string.delete) };
+		CharSequence[] actions = { getText(R.string.edit), getText(R.string.delete), getText(R.string.similar), getText(R.string.imdb) };
 
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(getActivity());
 		adBuilder.setTitle(R.string.pick_action);
@@ -120,6 +121,14 @@ public class TimerListFragment extends AbstractHttpListFragment {
 					break;
 				case 1:
 					deleteTimerConfirm();
+					break;
+				case 2:
+					// search for similar program
+					Common.findSimilarEvents(TimerListFragment.this, mTimer.getString(Timer.KEY_NAME));
+					break;
+				case 3:
+					// search for program at IMDb
+					IntentFactory.queryIMDb(getActivity(), mTimer.getString(Timer.KEY_NAME));
 					break;
 				}
 			}

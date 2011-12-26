@@ -264,6 +264,7 @@ public abstract class AbstractHttpFragment extends Fragment implements ActivityC
 	 */
 	protected void findSimilarEvents(ExtendedHashMap event){
 		//TODO fix findSimilarEvents
+		//TODO implement in Common.findSimilarEvents to remove duplicated code
 //		Intent intent = new Intent(getActivity(), SearchEpgActivity.class);
 //		intent.setAction(Intent.ACTION_SEARCH);
 //		intent.putExtra(SearchManager.QUERY, event.getString(Event.KEY_EVENT_TITLE));
@@ -357,11 +358,6 @@ public abstract class AbstractHttpFragment extends Fragment implements ActivityC
 
 	/**
 	 * Called after a Button has been clicked
-	 *
-	 * @param id
-	 *            The id of the item
-	 * @param longClick
-	 *            If true the item has been long-clicked
 	 */
 	@SuppressWarnings("unchecked")
 	private void onVolumeButtonClicked(String set) {
